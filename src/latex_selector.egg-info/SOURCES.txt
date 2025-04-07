@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/latex_selector.egg-info/PKG-INFO
+src/latex_selector.egg-info/SOURCES.txt
+src/latex_selector.egg-info/dependency_links.txt
+src/latex_selector.egg-info/entry_points.txt
+src/latex_selector.egg-info/requires.txt
+src/latex_selector.egg-info/top_level.txt

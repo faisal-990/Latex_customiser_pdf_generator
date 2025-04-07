@@ -1,0 +1,124 @@
+######Complete Installation Instructions ######
+Only follow this if the build script is for some reason not workinng on your system
+
+1. Manual Python Installation:
+bash
+Copy
+
+# Linux (Debian/Ubuntu)
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+
+# Windows
+Download from python.org (check "Add to PATH" during installation)
+
+2. Install Required Packages:
+bash
+Copy
+
+pip install PyQt5 setuptools
+
+3. Install LaTeX Engine:
+bash
+Copy
+
+# Linux
+sudo apt install texlive-latex-base texlive-latex-extra
+
+# Windows
+Download MikTeX: https://miktex.org/download
+
+# macOS
+brew install --cask mactex
+
+4. Run the Application:
+bash
+Copy
+
+# Method 1 - Using setup.py
+python setup.py install
+latex-selector
+
+# Method 2 - Direct run
+python src/main.py
+
+Troubleshooting Checklist
+
+If the window freezes or doesn't open:
+
+    Check Python version:
+    bash
+    Copy
+
+    python3 --version  # Should be 3.7+
+
+    Verify Qt installation:
+    bash
+    Copy
+
+    python3 -c "from PyQt5.QtWidgets import QApplication; print('Qt OK')"
+
+    Test LaTeX separately:
+    bash
+    Copy
+
+    pdflatex --version
+
+Common Fixes:
+
+    If getting ModuleNotFoundError:
+    bash
+    Copy
+
+    pip install -r requirements.txt
+
+    If PDF generation fails:
+    bash
+    Copy
+
+    sudo apt install texlive-fonts-recommended texlive-fonts-extra
+
+    For Windows-specific issues:
+
+        Add Python and LaTeX to PATH
+
+        Run Command Prompt as Administrator
+
+Alternative Launch Method:
+bash
+Copy
+
+# Create a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install PyQt5
+
+# Run directly
+python src/main.py
+
+Final Verification
+
+    The application window should open without errors
+
+    You should be able to:
+
+        Load .tex files
+
+        Select components
+
+        Generate PDFs
+
+        Close the window cleanly
+
+If issues persist, please:
+
+    Note the exact error message
+
+    Check output/output.log for LaTeX errors
+
+    Verify file permissions in the output/ directory
+
+This comprehensive approach ensures all dependencies are properly installed and the application runs correctly across different systems.
