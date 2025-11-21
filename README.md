@@ -1,82 +1,41 @@
 LaTeX Component Selector 📄✂️
 
-A PyQt5-based GUI application that lets you extract, select, and reassemble components from LaTeX documents. Perfect for creating customized documents by cherry-picking sections, equations, tables, and lists from existing LaTeX files.
+A simple GUI tool to extract and reassemble parts of LaTeX documents. Select the sections, equations, tables, or lists you want and generate a new PDF with just those components.
 
-🎯 Features
+✨ Features
 
-    📂 Load LaTeX Files - Import any .tex document
-    🔍 Smart Extraction - Automatically detects:
-        Sections and subsections
-        Mathematical equations
-        Tables
-        Itemized and numbered lists
-    ☑️ Component Selection - Check/uncheck components you want
-    📝 Generate Custom Documents - Creates new LaTeX file with only selected components
-    🖨️ Instant PDF Generation - Compiles to PDF automatically
-    👀 Preview Support - View generated .tex file before compilation
-
-🖼️ Screenshots
-
-┌─────────────────────────────────────────┐
-│  LaTeX Component Selector               │
-├─────────────────────────────────────────┤
-│  Select components                      │
-│  ┌───────────────────────────────────┐  │
-│  │ ☑ \section{Introduction}          │  │
-│  │ ☑ \subsection{Purpose}            │  │
-│  │ ☐ \subsection{Scope}              │  │
-│  │ ☑ [Equation 1] \[ x = \frac...    │  │
-│  │ ☐ [Table 1] \begin{tabular}...    │  │
-│  │ ☑ [Bullet List 1]                 │  │
-│  └───────────────────────────────────┘  │
-│  [Load .tex files]                      │
-│  [Generate PDF] [View Output .tex]      │
-└─────────────────────────────────────────┘
+    📂 Load any LaTeX .tex file
+    🔍 Auto-detect sections, equations, tables, and lists
+    ☑️ Pick and choose what to keep
+    📝 Generate new LaTeX document
+    🖨️ Compile to PDF instantly
 
 🚀 Quick Start
 Prerequisites
 
     Python 3.7+
-    LaTeX distribution (TeX Live on Linux, MacTeX on macOS, MiKTeX on Windows)
+    LaTeX (TeX Live, MacTeX, or MiKTeX)
 
-Installation
-Option 1: Automated Installation (Linux/macOS)
+Installation & Run
 bash
 
 # Clone the repository
 git clone https://github.com/yourusername/latex-component-selector.git
 cd latex-component-selector
 
-# Run installer
+# Run the installer (creates venv automatically)
 chmod +x install.sh
 ./install.sh
 
-# Run the application
+# Launch the app
 ./run.sh
 
-Option 2: Manual Installation
+That's it! The installer handles everything including virtual environment setup.
+Installing LaTeX (if needed)
+
+Linux:
 bash
 
-# Clone the repository
-git clone https://github.com/yourusername/latex-component-selector.git
-cd latex-component-selector
-
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -e .
-
-# Run the application
-latex-selector
-
-Installing LaTeX (if not already installed)
-
-Ubuntu/Debian:
-bash
-
-sudo apt-get update
 sudo apt-get install texlive-latex-base texlive-latex-extra
 
 macOS:
@@ -84,207 +43,86 @@ bash
 
 brew install --cask mactex
 
-Windows:
-
-    Download and install MiKTeX
-
+Windows: Download MiKTeX
 📖 Usage
-Basic Workflow
 
-    Launch the application
-
-bash
-
-   ./run.sh  # or: latex-selector
-
-    Load a LaTeX file
-        Click "Load .tex files"
-        Select your .tex document
-        Components will be extracted and displayed
-    Select components
-        Check the boxes next to components you want to keep
-        Components appear in document order
-    Generate PDF
-        Click "Generate PDF"
-        The application will:
-            Create output/output.tex with selected components
-            Compile to output/output.pdf
-            Open the PDF automatically
-    View LaTeX source (optional)
-        Click "View Output .tex" to see the generated LaTeX code
+    Launch: Run ./run.sh
+    Load: Click "Load .tex files" and select your document
+    Select: Check the components you want to keep
+    Generate: Click "Generate PDF"
+    View: PDF opens automatically, or click "View Output .tex" to see the LaTeX code
 
 Example
 
-Input file (demo.tex):
+Load this document:
 latex
 
 \section{Introduction}
-Introduction text here...
+Some intro text...
 
 \section{Math}
 \[ E = mc^2 \]
 
 \section{Conclusion}
-Conclusion text here...
+Final thoughts...
 
-After selecting only "Introduction" and the equation:
+Select only "Introduction" and the equation → Get a new PDF with just those two parts!
+🎯 What Gets Extracted
 
-Output (output.tex):
-latex
-
-\documentclass{article}
-\usepackage[table]{xcolor}
-\usepackage{amsmath}
-\begin{document}
-
-\section{Introduction}
-
-\[ E = mc^2 \]
-
-\end{document}
-
-🎓 Use Cases
-
-    Academic Papers - Extract specific sections for presentations
-    Report Generation - Combine sections from multiple documents
-    Template Creation - Build custom templates from existing documents
-    Learning LaTeX - Study how different components are structured
-    Document Cleanup - Remove unwanted sections while preserving formatting
-
-🗂️ Project Structure
-
-latex-component-selector/
-├── src/
-│   ├── main.py          # Application entry point
-│   ├── gui.py           # PyQt5 interface
-│   ├── parser.py        # LaTeX component extraction
-│   ├── builder.py       # LaTeX file assembly
-│   ├── compiler.py      # PDF compilation
-│   └── data/            # Sample .tex files
-├── output/              # Generated files (created automatically)
-│   ├── output.tex       # Generated LaTeX
-│   └── output.pdf       # Compiled PDF
-├── install.sh           # Automated installer
-├── run.sh               # Convenience script
-├── setup.py             # Package configuration
-└── README.md            # This file
-
-⚙️ Configuration
-Supported Component Types
-
-Currently extracts:
-
-    \section{...}
-    \subsection{...}
-    \subsubsection{...}
-    \begin{tabular}...\end{tabular} (complete tables)
-    \begin{itemize}...\end{itemize} (bullet lists)
-    \begin{enumerate}...\end{enumerate} (numbered lists)
-    \[ ... \] (display math equations)
-
-Custom LaTeX Packages
-
-The default preamble includes:
-latex
-
-\usepackage[table]{xcolor}  % For colored tables
-\usepackage{amsmath}        % For mathematical equations
-
-To add more packages, modify src/builder.py:
-python
-
-preamble = """\\documentclass{article}
-\\usepackage[table]{xcolor}
-\\usepackage{amsmath}
-\\usepackage{graphicx}  # Add your package here
-\\begin{document}
-"""
+    Sections (\section, \subsection)
+    Math equations (\[ ... \])
+    Tables (\begin{tabular}...)
+    Lists (itemize, enumerate)
 
 🛠️ Troubleshooting
-Common Issues
 
-Problem: "Module not found: src"
+Problem: "pdflatex not found"
 bash
 
-# Solution: Activate virtual environment
-source venv/bin/activate
-pip install -e .
-
-Problem: "pdflatex: command not found"
-bash
-
-# Solution: Install LaTeX
-# Ubuntu/Debian:
 sudo apt-get install texlive-latex-base texlive-latex-extra
 
-Problem: "Package array Error: Illegal pream-token"
-
-    This occurs if you manually select table formatting commands
-    Solution: Select complete [Table N] items instead of individual commands
-
-Problem: PDF not opening automatically
+Problem: Can't run scripts
 bash
 
-# Install a PDF viewer
-# Linux:
-sudo apt-get install zathura  # or evince, okular
+chmod +x install.sh run.sh
 
-# Then manually open:
-zathura output/output.pdf
-
-Debug Mode
-
-To see detailed LaTeX compilation output:
+Problem: PDF won't open
 bash
 
-# Run from terminal to see compilation logs
-latex-selector
+# Manually open the PDF
+xdg-open output/output.pdf  # Linux
+open output/output.pdf      # macOS
 
-Check output/output.log for LaTeX errors.
+Check output/output.log for LaTeX compilation errors.
+📁 Project Structure
+
+├── src/              # Source code
+├── install.sh        # One-click installer
+├── run.sh            # Launch script
+├── setup.py          # Package config
+└── README.md         # This file
+
+Generated files go in output/ (created automatically).
 🤝 Contributing
 
-Contributions are welcome! Here's how you can help:
+Contributions welcome! Feel free to:
 
-    Fork the repository
-    Create a feature branch (git checkout -b feature/AmazingFeature)
-    Commit your changes (git commit -m 'Add some AmazingFeature')
-    Push to the branch (git push origin feature/AmazingFeature)
-    Open a Pull Request
-
-Ideas for Contributions
-
-    Add support for figures and images
-    Implement drag-and-drop component reordering
-    Add live LaTeX preview panel
-    Support for BibTeX references
-    Export to other formats (Markdown, HTML)
-    Dark mode theme
-    Component search/filter functionality
-
-📋 Requirements
-
-    Python 3.7 or higher
-    PyQt5 >= 5.15.7
-    LaTeX distribution (TeX Live, MacTeX, or MiKTeX)
-    Operating System: Linux, macOS, or Windows
+    Report bugs
+    Suggest features
+    Submit pull requests
 
 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-🙏 Acknowledgments
+MIT License - see LICENSE file.
+💡 Use Cases
 
-    Built with PyQt5
-    LaTeX compilation via pdflatex
-    Inspired by the need for modular LaTeX document management
-
-📧 Contact
-
-Project Maintainer: Sawez
-Issues: https://github.com/yourusername/latex-component-selector/issues
-Discussions: https://github.com/yourusername/latex-component-selector/discussions
-🌟 Star History
-
-If you find this project useful, please consider giving it a star! ⭐
+    Extract specific sections for presentations
+    Combine parts from multiple documents
+    Create custom templates
+    Study LaTeX structure
+    Quick document cleanup
 
 Made with ❤️ for the LaTeX community
+
+For detailed technical documentation, see DEVELOPER_GUIDE.md.
 
