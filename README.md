@@ -1,7 +1,3 @@
-Here is the complete, reformed **README** file, integrating the clear, structured installation instructions separated by operating system.
-
------
-
 # LaTeX Component Selector 📄✂️
 
 A simple **GUI tool** to extract and reassemble parts of LaTeX documents. Select the sections, equations, tables, or lists you want and generate a new PDF with just those components.
