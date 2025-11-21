@@ -17,6 +17,7 @@ Prerequisites
     LaTeX (TeX Live, MacTeX, or MiKTeX)
 
 Installation & Run
+Linux / macOS
 bash
 
 # Clone the repository
@@ -30,7 +31,30 @@ chmod +x install.sh
 # Launch the app
 ./run.sh
 
-That's it! The installer handles everything including virtual environment setup.
+Windows
+cmd
+
+# Clone the repository
+git clone https://github.com/yourusername/latex-component-selector.git
+cd latex-component-selector
+
+# Create virtual environment
+python -m venv venv
+
+# Activate it
+venv\Scripts\activate
+
+# Install the package
+pip install -e .
+
+# Launch the app
+run.bat
+
+Or after first install, just run:
+cmd
+
+run.bat
+
 Installing LaTeX (if needed)
 
 Linux:
@@ -43,7 +67,7 @@ bash
 
 brew install --cask mactex
 
-Windows: Download MiKTeX
+Windows: Download and install MiKTeX
 📖 Usage
 
     Launch: Run ./run.sh
