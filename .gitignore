@@ -4,6 +4,8 @@ env/
 ENV/
 .venv/
 
+#personal guide
+devGuide.md
 # Python Cache
 __pycache__/
 *.py[cod]
