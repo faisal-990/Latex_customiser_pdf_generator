@@ -1,86 +1,98 @@
-LaTeX Component Selector 📄✂️
+# LaTeX Component Selector 📄✂️
 
-A simple GUI tool to extract and reassemble parts of LaTeX documents. Select the sections, equations, tables, or lists you want and generate a new PDF with just those components.
+A simple **GUI tool** to extract and reassemble parts of LaTeX documents. Select the sections, equations, tables, or lists you want and generate a new PDF with just those components.
 
-✨ Features
+## ✨ Features
 
-    📂 Load any LaTeX .tex file
-    🔍 Auto-detect sections, equations, tables, and lists
-    ☑️ Pick and choose what to keep
-    📝 Generate new LaTeX document
-    🖨️ Compile to PDF instantly
+  * 📂 Load any LaTeX `.tex` file
+  * 🔍 Auto-detect **sections, equations, tables, and lists**
+  * ☑️ Pick and choose what to keep
+  * 📝 Generate new LaTeX document
+  * 🖨️ Compile to PDF instantly
 
-🚀 Quick Start
-Prerequisites
+-----
 
-    Python 3.7+
-    LaTeX (TeX Live, MacTeX, or MiKTeX)
+## 🚀 Quick Start: Installation & Run
 
-Installation & Run
-Linux / macOS
-bash
+This tool requires **Python 3.7+** and a working **LaTeX distribution** (TeX Live, MacTeX, or MiKTeX) installed on your system.
 
-# Clone the repository
+### Prerequisites (Install if needed)
+
+| Operating System | LaTeX Distribution | Installation Command / Method |
+| :--- | :--- | :--- |
+| **Linux (Debian/Ubuntu)** | TeX Live | `sudo apt-get install texlive-latex-base texlive-latex-extra` |
+| **macOS** | MacTeX | `brew install --cask mactex` (Requires Homebrew) |
+| **Windows** | MiKTeX | **Download and install** from the [MiKTeX website](https://miktex.org/download) |
+
+-----
+
+### 💻 Installation & Execution
+
+Follow the specific steps for your operating system below.
+
+-----
+
+### **🐧 macOS & Linux**
+
+#### 1\. Clone the repository and navigate into the folder:
+
+```bash
 git clone https://github.com/yourusername/latex-component-selector.git
 cd latex-component-selector
+```
 
-# Run the installer (creates venv automatically)
-chmod +x install.sh
+#### 2\. Install and Launch with the Scripts:
+
+The **`install.sh`** script automatically sets up the virtual environment and installs dependencies.
+
+```bash
+# Make sure scripts are executable
+chmod +x install.sh run.sh
+
+# Run the installer (creates venv and installs dependencies)
 ./install.sh
 
-# Launch the app
+# Launch the application
 ./run.sh
+```
 
-Windows
-cmd
+-----
 
-# Clone the repository
+### **🪟 Windows**
+
+#### 1\. Clone the repository and navigate into the folder:
+
+```cmd
 git clone https://github.com/yourusername/latex-component-selector.git
 cd latex-component-selector
+```
 
-# Create virtual environment
-python -m venv venv
+#### 2\. Install and Launch with the Script:
 
-# Activate it
-venv\Scripts\activate
+The **`run.bat`** script handles environment activation, dependency installation, and launch the first time it's run.
 
-# Install the package
-pip install -e .
-
-# Launch the app
+```cmd
+# Run the application (installs dependencies on first run)
 run.bat
+```
 
-Or after first install, just run:
-cmd
+> **Tip:** For subsequent launches, just run `run.bat` again.
 
-run.bat
+-----
 
-Installing LaTeX (if needed)
+## 📖 Usage
 
-Linux:
-bash
+1.  **Launch:** Run the app using the command for your system (`./run.sh` or `run.bat`).
+2.  **Load:** Click "**Load .tex files**" and select your LaTeX document.
+3.  **Select:** Check the components (sections, equations, tables, lists) you want to keep in the output.
+4.  **Generate:** Click "**Generate PDF**".
+5.  **View:** The resulting PDF will open automatically, or you can click "**View Output .tex**" to see the generated LaTeX code.
 
-sudo apt-get install texlive-latex-base texlive-latex-extra
+### Example
 
-macOS:
-bash
+Load this sample document:
 
-brew install --cask mactex
-
-Windows: Download and install MiKTeX
-📖 Usage
-
-    Launch: Run ./run.sh
-    Load: Click "Load .tex files" and select your document
-    Select: Check the components you want to keep
-    Generate: Click "Generate PDF"
-    View: PDF opens automatically, or click "View Output .tex" to see the LaTeX code
-
-Example
-
-Load this document:
-latex
-
+```latex
 \section{Introduction}
 Some intro text...
 
@@ -89,64 +101,89 @@ Some intro text...
 
 \section{Conclusion}
 Final thoughts...
+```
 
-Select only "Introduction" and the equation → Get a new PDF with just those two parts!
-🎯 What Gets Extracted
+Select only "**Introduction**" and the **equation** $\left( E = mc^2 \right)$ $\rightarrow$ Get a new PDF with just those two parts\!
 
-    Sections (\section, \subsection)
-    Math equations (\[ ... \])
-    Tables (\begin{tabular}...)
-    Lists (itemize, enumerate)
+### 🎯 What Gets Extracted
 
-🛠️ Troubleshooting
+The tool intelligently parses the following LaTeX components:
 
-Problem: "pdflatex not found"
-bash
+  * **Sections:** (`\section`, `\subsection`, `\chapter`, etc.)
+  * **Math equations:** (`\[ ... \]`, `$$...$$`, and `\begin{equation}...`)
+  * **Tables:** (`\begin{tabular}`, `\begin{table}`, etc.)
+  * **Lists:** (`\begin{itemize}`, `\begin{enumerate}`, etc.)
 
-sudo apt-get install texlive-latex-base texlive-latex-extra
+-----
 
-Problem: Can't run scripts
-bash
+## 🛠️ Troubleshooting
 
+### **"pdflatex not found" Error**
+
+This means your LaTeX distribution is not properly installed or configured in your system's PATH.
+
+  * **Linux/macOS:** Ensure you have installed **TeX Live** or **MacTeX** correctly. For Linux, you might need to install additional packages:
+    ```bash
+    sudo apt-get install texlive-latex-base texlive-latex-extra
+    ```
+
+### **Can't run scripts (Linux/macOS)**
+
+The scripts (`install.sh`, `run.sh`) need executable permissions.
+
+```bash
 chmod +x install.sh run.sh
+```
 
-Problem: PDF won't open
-bash
+### **PDF won't open**
 
-# Manually open the PDF
-xdg-open output/output.pdf  # Linux
-open output/output.pdf      # macOS
+The automatic PDF viewer may fail on some systems. You can manually open the generated file.
 
-Check output/output.log for LaTeX compilation errors.
-📁 Project Structure
+  * **Linux:** `xdg-open output/output.pdf`
+  * **macOS:** `open output/output.pdf`
 
-├── src/              # Source code
-├── install.sh        # One-click installer
-├── run.sh            # Launch script
-├── setup.py          # Package config
+Check the `output/output.log` file for any LaTeX compilation errors.
+
+-----
+
+## 📁 Project Structure
+
+```
+├── src/              # Python Source code for the GUI logic
+├── install.sh        # Linux/macOS One-click installer
+├── run.sh            # Linux/macOS Launch script
+├── run.bat           # Windows Launch script
+├── setup.py          # Package configuration
 └── README.md         # This file
+```
 
-Generated files go in output/ (created automatically).
-🤝 Contributing
+> Generated output files (PDF, .tex, .log) are placed in the `output/` directory (created automatically).
 
-Contributions welcome! Feel free to:
+-----
 
-    Report bugs
-    Suggest features
-    Submit pull requests
+## 💡 Use Cases
 
-📄 License
+  * Extract specific sections for **presentations** or handouts.
+  * **Combine parts** from multiple documents into one new file.
+  * Create **custom templates** from existing work.
+  * Quickly **cleanup** or restructure a document.
 
-MIT License - see LICENSE file.
-💡 Use Cases
+-----
 
-    Extract specific sections for presentations
-    Combine parts from multiple documents
-    Create custom templates
-    Study LaTeX structure
-    Quick document cleanup
+## 🤝 Contributing
+
+We welcome contributions\! Feel free to:
+
+  * Report bugs
+  * Suggest features
+  * Submit pull requests
+
+-----
+
+## 📄 License
+
+**MIT License** - see the `LICENSE` file for details.
+
+-----
 
 Made with ❤️ for the LaTeX community
-
-For detailed technical documentation, see DEVELOPER_GUIDE.md.
-
