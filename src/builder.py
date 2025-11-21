@@ -3,7 +3,8 @@ from pathlib import Path
 
 def build_tex(selected):
     """Build LaTeX file while preventing duplicate document commands."""
-    output_dir = Path("output")
+    # Use output directory relative to current working directory
+    output_dir = Path.cwd() / "output"
     output_dir.mkdir(exist_ok=True)
 
     # Commands that should only appear once
@@ -25,16 +26,8 @@ def build_tex(selected):
             f.write("Sample content\\\\\n")
         else:
             for comp in selected:
-                clean_comp = comp.strip('\\').strip()
-                
-                # Skip commands already in preamble
-                if any(cmd in clean_comp.lower() for cmd in SINGLE_USE_COMMANDS):
-                    continue
-                    
-                # Handle special cases
-                if clean_comp.lower() == 'par':
-                    f.write("\\\\\n")
-                elif clean_comp:  # Only write non-empty commands
-                    f.write(f"\\{clean_comp}\n")
+                # Don't strip or modify - write content as-is
+                if not any(cmd in comp.lower() for cmd in SINGLE_USE_COMMANDS):
+                    f.write(f"{comp}\n")
         
         f.write("\\end{document}\n")

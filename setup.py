@@ -25,7 +25,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'latex-selector=src.main:main',
+            'latex-selector=main:main',  # Fixed: removed 'src.' prefix
         ],
     },
     python_requires='>=3.7',

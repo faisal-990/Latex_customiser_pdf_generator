@@ -5,9 +5,8 @@ from pathlib import Path
 
 def compile_pdf():
     try:
-        # Define absolute paths
-        project_root = Path(__file__).parent.absolute()
-        output_dir = project_root / "output"
+        # Use output directory relative to current working directory
+        output_dir = Path.cwd() / "output"
         tex_file = output_dir / "output.tex"
 
         # Ensure directory exists
@@ -24,9 +23,7 @@ def compile_pdf():
                 "-interaction=nonstopmode",
                 "-halt-on-error",
                 f"-output-directory={output_dir}",
-                str(
-                    tex_file.name
-                ),  # Use just the filename when running from output dir
+                str(tex_file.name),  # Use just the filename
             ],
             cwd=str(output_dir),  # Run from output directory
             capture_output=True,
